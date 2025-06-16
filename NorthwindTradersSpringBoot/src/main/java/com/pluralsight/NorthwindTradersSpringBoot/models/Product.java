@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
     private int productId;
-    public String name;
+    private String name;
     private String category;
     private double price;
 
     public Product(){
-        //do nothing
+        //do nothing.
     }
 
     public Product(int productId, String name, String category, double price) {
@@ -49,5 +49,15 @@ public class Product implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
