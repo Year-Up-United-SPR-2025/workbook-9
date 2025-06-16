@@ -8,7 +8,7 @@ public class Product implements Serializable {
     private String category;
     private double price;
 
-    public Product(){
+    public Product() {
         //do nothing.
     }
 
