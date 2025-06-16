@@ -1,4 +1,4 @@
-package com.pluralsight.demo.Model;
+package com.pluralsight.demo.model;
 
 import java.util.Objects;
 

@@ -2,8 +2,7 @@ package com.pluralsight.demo.dao;
 
 import java.util.HashMap;
 
-import com.pluralsight.demo.Model.Student;
-import com.pluralsight.demo.dao.RegistrationDAO;
+import com.pluralsight.demo.model.Student;
 import org.springframework.stereotype.Component;
 
 // Component tells Spring to create an object from the class and
