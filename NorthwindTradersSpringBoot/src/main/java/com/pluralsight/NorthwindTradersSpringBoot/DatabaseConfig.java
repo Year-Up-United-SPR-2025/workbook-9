@@ -1,5 +1,8 @@
 package com.pluralsight.NorthwindTradersSpringBoot;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DatabaseConfig {
     private String username;
     private String password;
