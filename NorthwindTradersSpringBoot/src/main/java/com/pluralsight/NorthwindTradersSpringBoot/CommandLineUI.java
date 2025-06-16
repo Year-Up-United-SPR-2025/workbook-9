@@ -1,7 +1,7 @@
 package com.pluralsight.NorthwindTradersSpringBoot;
 
 
-import com.pluralsight.NorthwindTradersSpringBoot.DAO.ProductDAO;
+import com.pluralsight.NorthwindTradersSpringBoot.data.ProductDAO;
 import com.pluralsight.NorthwindTradersSpringBoot.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
