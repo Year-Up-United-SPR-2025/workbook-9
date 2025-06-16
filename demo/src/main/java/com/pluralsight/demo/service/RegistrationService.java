@@ -1,7 +1,6 @@
 package com.pluralsight.demo.service;
 
 import com.pluralsight.demo.Model.Student;
-import com.pluralsight.demo.StudentAlreadyRegisteredException;
 import com.pluralsight.demo.dao.RegistrationDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
