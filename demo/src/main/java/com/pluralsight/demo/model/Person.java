@@ -1,5 +1,6 @@
 package com.pluralsight.demo.model;
 
+//If Serializable it will always be a bean
 import java.io.Serializable;
 
 public class Person implements Serializable {
