@@ -26,4 +26,8 @@ public class RegistrationService {
         }
         return registrationDAO.persistStudent(student);
     }
+
+    public Student getStudentById(long id) {
+        return this.registrationDAO.findById(id);
+    }
 }

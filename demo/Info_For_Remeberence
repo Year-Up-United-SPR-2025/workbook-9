@@ -1,0 +1,24 @@
+In Java, a "bean" typically refers to a JavaBean, which is a class that follows specific conventions. These conventions enable the bean to be easily used in various frameworks and tools. Here are the key characteristics of a JavaBean:
+Public No-Argument Constructor:
+.
+Opens in new tab
+It must have a public constructor that takes no arguments. This allows frameworks to easily create instances of the bean.
+Private Instance Variables:
+.
+Opens in new tab
+Instance variables should be private to ensure encapsulation.
+Public Getter and Setter Methods:
+.
+Opens in new tab
+Access to the bean's properties is provided through public getter and setter methods. For example, a property named name would have a getName() method for retrieval and a setName(String name) method for modification. Boolean properties often use is instead of get (e.g., isAvailable()).
+Serializable:
+.
+Opens in new tab
+The class should implement the java.io.Serializable interface. This allows the bean's state to be saved and restored, enabling features like persistence and session management.
+Purpose of JavaBeans:
+Reusability: JavaBeans are designed to be reusable components.
+Configuration: They can be easily configured through their properties.
+Persistence: Their state can be saved and restored.
+Framework Compatibility: JavaBeans are widely used in frameworks like Spring, where they are managed by the framework's container.
+Spring Framework and @Bean:
+In the Spring Framework, the @Bean annotation is used to declare that a method produces a bean to be managed by the Spring IoC container. This annotation is typically used in a configuration class annotated with @Configuration.
