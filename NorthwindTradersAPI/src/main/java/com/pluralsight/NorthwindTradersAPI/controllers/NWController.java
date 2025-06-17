@@ -10,6 +10,6 @@ public class NWController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String index(@RequestParam(defaultValue = "World") String country) {
-        return "<h1>Hello" + country + " </h1> <p>Welcome to the Northwind Database</p>";
+        return "<h1>Hello " + country + "</h1> <p>Welcome to the Northwind Database</p>";
     }
 }
