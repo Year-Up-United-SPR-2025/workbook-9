@@ -9,6 +9,6 @@ public class HomeController {
 
     @RequestMapping(path="/", method= RequestMethod.GET)
     public String index(){
-        return "<h1>Hello World</h1> <p>HAve a nice day</p>";
+        return "<h1>Hello World</h1> <p>Have a nice day</p>";
     }
 }
