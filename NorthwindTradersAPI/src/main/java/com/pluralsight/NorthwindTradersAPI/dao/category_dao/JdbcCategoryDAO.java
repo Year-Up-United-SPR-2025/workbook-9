@@ -29,9 +29,7 @@ public class JdbcCategoryDAO {
         String query = """
                 SELECT
                     CategoryId,
-                    CategoryName,
-                    Description,
-                    Picture
+                    CategoryName
                 FROM
                     categories
                 """;
@@ -49,9 +47,7 @@ public class JdbcCategoryDAO {
             while (resultSet.next()) {
                 int categoryId = resultSet.getInt(1);
                 String categoryName = resultSet.getString(2);
-                String description = resultSet.getString(3);
-                byte[] picture = resultSet.getBytes(4); // Assuming Picture is stored as a byte array
-                Category category = new Category(categoryId, categoryName, description, picture);
+                Category category = new Category(categoryId, categoryName);
                 categories.add(category);
             }
         } catch (SQLException e) {
@@ -65,9 +61,7 @@ public class JdbcCategoryDAO {
         String query = """
                 SELECT
                     CategoryId,
-                    CategoryName,
-                    Description,
-                    Picture
+                    CategoryName
                 FROM
                     categories
                 WHERE
@@ -87,9 +81,7 @@ public class JdbcCategoryDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String categoryName = resultSet.getString(2);
-                    String description = resultSet.getString(3);
-                    byte[] picture = resultSet.getBytes(4); // Assuming Picture is stored as a byte array
-                    return new Category(categoryId, categoryName, description, picture);
+                    return new Category(categoryId, categoryName);
                 }
             }
         } catch (SQLException e) {
