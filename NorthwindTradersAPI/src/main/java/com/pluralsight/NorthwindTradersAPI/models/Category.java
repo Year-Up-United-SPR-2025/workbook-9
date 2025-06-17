@@ -1,20 +1,19 @@
 package com.pluralsight.NorthwindTradersAPI.models;
 
-import java.io.Serializable;
-
-public class Category implements Serializable {
+public class Category {
     private int categoryId;
     private String categoryName;
+    private String description;
+    private byte[] picture; // Assuming Picture is stored as a byte array
 
-    public Category() {
-
-    }
-
-    public Category(int categoryId, String categoryName) {
+    public Category(int categoryId, String categoryName, String description, byte[] picture) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.description = description;
+        this.picture = picture;
     }
 
+    // Getters and Setters
     public int getCategoryId() {
         return categoryId;
     }
@@ -31,11 +30,19 @@ public class Category implements Serializable {
         this.categoryName = categoryName;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                '}';
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 }
