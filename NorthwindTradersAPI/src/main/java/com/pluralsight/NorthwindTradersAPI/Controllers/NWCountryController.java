@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NWCountryController {
 
-    @RequestMapping(path = "/country", method = RequestMethod.GET)
+    @RequestMapping(path = " /country", method = RequestMethod.GET)
     public String index() {
         return "country user page";
     }
