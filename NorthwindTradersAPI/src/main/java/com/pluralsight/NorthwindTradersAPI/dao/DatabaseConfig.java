@@ -1,4 +1,4 @@
-package com.pluralsight.NorthwindTradersAPI.DAO;
+package com.pluralsight.NorthwindTradersAPI.dao;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
