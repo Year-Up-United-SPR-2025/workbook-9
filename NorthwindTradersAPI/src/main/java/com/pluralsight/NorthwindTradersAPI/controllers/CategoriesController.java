@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 public class CategoriesController {
-
     @RequestMapping(path = "/categories", method = RequestMethod.GET)
     public List<Category> getCategories() {
         ArrayList<Category> categories = new ArrayList<>();
@@ -36,7 +35,7 @@ public class CategoriesController {
     }
 
     @RequestMapping(path = "/categories/{id}", method = RequestMethod.GET)
-    public List<Category> getCategories(@PathVariable int categoryId) {
+    public List<Category> getCategories(@PathVariable int id) {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(1, "Drinks"));
         categories.add(new Category(2, "Snacks"));
@@ -56,9 +55,14 @@ public class CategoriesController {
         categories.add(new Category(16, "Personal Care"));
         categories.add(new Category(17, "Pet Supplies"));
 
+        for (Category c : categories) {
+            if (c.getCategoryId() == id) {
+                ArrayList<Category> resultingCategories = new ArrayList<>();
+                resultingCategories.add(c);
+                return resultingCategories;
+            }
+        }
 
-        ArrayList<Category> resultingCategories = new ArrayList<>();
-        return categories.stream().filter(c -> c.getCategoryId() == categoryId).toList();
+        return new ArrayList<Category>();
     }
-
 }
