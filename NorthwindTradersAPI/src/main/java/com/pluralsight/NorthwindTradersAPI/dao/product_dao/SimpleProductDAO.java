@@ -1,4 +1,4 @@
-package com.pluralsight.NorthwindTradersAPI.dao;
+package com.pluralsight.NorthwindTradersAPI.dao.product_dao;
 
 import com.pluralsight.NorthwindTradersAPI.models.Product;
 import org.springframework.stereotype.Component;

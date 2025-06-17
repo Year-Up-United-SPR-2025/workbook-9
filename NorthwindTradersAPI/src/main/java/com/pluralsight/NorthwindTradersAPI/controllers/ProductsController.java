@@ -1,7 +1,7 @@
 package com.pluralsight.NorthwindTradersAPI.controllers;
 
 
-import com.pluralsight.NorthwindTradersAPI.dao.ProductDAO;
+import com.pluralsight.NorthwindTradersAPI.dao.product_dao.ProductDAO;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
