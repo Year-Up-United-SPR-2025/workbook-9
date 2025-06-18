@@ -46,12 +46,11 @@ public class JdbcProductDAO implements ProductDAO {
                 """;
 
 
-        try(
+        try (
                 Connection connection = basicDataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                ResultSet resultSet = preparedStatement.executeQuery();)
-        {
-            while(resultSet.next()){
+                ResultSet resultSet = preparedStatement.executeQuery();) {
+            while (resultSet.next()) {
                 int productId = resultSet.getInt(1);
                 String productName = resultSet.getString(2);
                 int categoryId = resultSet.getInt(3);
@@ -80,14 +79,13 @@ public class JdbcProductDAO implements ProductDAO {
                                products
                                WHERE ProductID = ?""";
 
-        try(
+        try (
                 Connection connection = basicDataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-        )
-        {
+        ) {
             preparedStatement.setInt(1, productId);
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
-                while(resultSet.next()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
                     String productName = resultSet.getString(2);
                     int categoryId = resultSet.getInt(3);
                     double price = resultSet.getDouble(4);
@@ -96,8 +94,7 @@ public class JdbcProductDAO implements ProductDAO {
                 }
             }
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -115,16 +112,16 @@ public class JdbcProductDAO implements ProductDAO {
                 (?, 1, ?, ?)
                 """;
 
-        try(
+        try (
                 Connection connection = basicDataSource.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS );
-        ){
+                PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        ) {
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setInt(2, product.getCategoryId());
             preparedStatement.setDouble(3, product.getPrice());
             int rows = preparedStatement.executeUpdate();
-            try(ResultSet keys = preparedStatement.getGeneratedKeys()){
-                while(keys.next()){
+            try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
+                while (keys.next()) {
                     Product result = new Product();
                     result.setProductId(keys.getInt(1));
                     result.setProductName(product.getProductName());
@@ -137,11 +134,7 @@ public class JdbcProductDAO implements ProductDAO {
             throw new RuntimeException(e);
         }
 
-
         return null;
-
-
-
 
     }
 }
