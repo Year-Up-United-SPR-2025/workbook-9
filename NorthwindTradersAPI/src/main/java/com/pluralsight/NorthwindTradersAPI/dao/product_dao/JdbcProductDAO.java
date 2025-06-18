@@ -2,6 +2,7 @@ package com.pluralsight.NorthwindTradersAPI.dao.product_dao;
 
 import com.pluralsight.NorthwindTradersAPI.dao.DatabaseConfig;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
+import jakarta.websocket.RemoteEndpoint;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +19,15 @@ public class JdbcProductDAO implements ProductDAO {
 
 
     private DatabaseConfig databaseConfig;
+    private BasicDataSource basicDataSource;
 
     @Autowired
     public JdbcProductDAO(DatabaseConfig databaseConfig) {
         this.databaseConfig = databaseConfig;
+        this.basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(databaseConfig.getUrl());
+        basicDataSource.setUsername(databaseConfig.getUsername());
+        basicDataSource.setPassword(databaseConfig.getPassword());
     }
 
     @Override
@@ -39,10 +45,6 @@ public class JdbcProductDAO implements ProductDAO {
                                 products
                 """;
 
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(databaseConfig.getUrl());
-        basicDataSource.setUsername(databaseConfig.getUsername());
-        basicDataSource.setPassword(databaseConfig.getPassword());
 
         try(
                 Connection connection = basicDataSource.getConnection();
@@ -78,12 +80,6 @@ public class JdbcProductDAO implements ProductDAO {
                                products
                                WHERE ProductID = ?""";
 
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(databaseConfig.getUrl());
-        basicDataSource.setUsername(databaseConfig.getUsername());
-        basicDataSource.setPassword(databaseConfig.getPassword());
-
         try(
                 Connection connection = basicDataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -111,6 +107,41 @@ public class JdbcProductDAO implements ProductDAO {
 
     @Override
     public Product addProduct(Product product) {
-        return new Product();
+
+        String query = """
+                INSERT INTO products
+                (ProductName, SupplierID, CategoryID, UnitPrice)
+                VALUES
+                (?, 1, ?, ?)
+                """;
+
+        try(
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS );
+        ){
+            preparedStatement.setString(1, product.getProductName());
+            preparedStatement.setInt(2, product.getCategoryId());
+            preparedStatement.setDouble(3, product.getPrice());
+            int rows = preparedStatement.executeUpdate();
+            try(ResultSet keys = preparedStatement.getGeneratedKeys()){
+                while(keys.next()){
+                    Product result = new Product();
+                    result.setProductId(keys.getInt(1));
+                    result.setProductName(product.getProductName());
+                    result.setCategoryId(product.getCategoryId());
+                    result.setPrice(product.getPrice());
+                    return result;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return null;
+
+
+
+
     }
 }
