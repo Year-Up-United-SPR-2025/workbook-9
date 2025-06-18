@@ -32,8 +32,8 @@ public class SimpleCategoryDAO implements CategoryDAO {
     }
 
     @Override
-    public void addCategory(Category category) {
+    public Category addCategory(Category category) {
         // Add the new category to the list
-        categories.add(category);
+        return new Category();
     }
 }

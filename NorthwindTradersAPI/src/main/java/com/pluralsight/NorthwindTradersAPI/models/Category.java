@@ -15,6 +15,10 @@ public class Category {
         this.picture = picture;
     }
 
+    public Category() {
+        //do nothing
+    }
+
     // Getters and Setters
     public int getCategoryId() {
         return categoryId;

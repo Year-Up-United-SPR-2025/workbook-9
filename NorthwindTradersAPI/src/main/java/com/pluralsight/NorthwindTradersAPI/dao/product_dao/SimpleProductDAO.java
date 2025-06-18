@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SimpleProductDAO implements ProductDAO{
+public class SimpleProductDAO implements ProductDAO {
 
 
     @Override

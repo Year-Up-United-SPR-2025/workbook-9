@@ -14,15 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcCategoryDAO {
+public class JdbcCategoryDAO implements CategoryDAO {
 
     private DatabaseConfig databaseConfig;
+    private BasicDataSource basicDataSource;
 
     @Autowired
     public JdbcCategoryDAO(DatabaseConfig databaseConfig) {
         this.databaseConfig = databaseConfig;
+        this.basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(databaseConfig.getUrl());
+        basicDataSource.setUsername(databaseConfig.getUsername());
+        basicDataSource.setPassword(databaseConfig.getPassword());
     }
 
+    @Override
     public List<Category> getAllCategories() {
         ArrayList<Category> categories = new ArrayList<>();
 
@@ -35,11 +41,6 @@ public class JdbcCategoryDAO {
                 FROM
                     categories
                 """;
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(databaseConfig.getUrl());
-        basicDataSource.setUsername(databaseConfig.getUsername());
-        basicDataSource.setPassword(databaseConfig.getPassword());
 
         try (
                 Connection connection = basicDataSource.getConnection();
@@ -61,6 +62,7 @@ public class JdbcCategoryDAO {
         return categories;
     }
 
+    @Override
     public Category getCategoryById(int categoryId) {
         String query = """
                 SELECT
@@ -73,11 +75,6 @@ public class JdbcCategoryDAO {
                 WHERE
                     CategoryId = ?
                 """;
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(databaseConfig.getUrl());
-        basicDataSource.setUsername(databaseConfig.getUsername());
-        basicDataSource.setPassword(databaseConfig.getPassword());
 
         try (
                 Connection connection = basicDataSource.getConnection();
@@ -99,7 +96,37 @@ public class JdbcCategoryDAO {
         return null;
     }
 
-    public void addCategory(Category category) {
-        // Implementation for adding a category will be done later
+    @Override
+    public Category addCategory(Category category) {
+        String query = """
+                INSERT INTO categories
+                (CategoryName, Description, Picture)
+                VALUES
+                (?, ?, ?)
+                """;
+
+        try (
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        ) {
+            preparedStatement.setString(1, category.getCategoryName());
+            preparedStatement.setString(2, category.getDescription());
+            preparedStatement.setBytes(3, category.getPicture());
+            int rows = preparedStatement.executeUpdate();
+            try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
+                if (keys.next()) {
+                    Category result = new Category();
+                    result.setCategoryId(keys.getInt(1));
+                    result.setCategoryName(category.getCategoryName());
+                    result.setDescription(category.getDescription());
+                    result.setPicture(category.getPicture());
+                    return result;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
     }
 }
