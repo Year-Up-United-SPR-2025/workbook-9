@@ -14,7 +14,7 @@ public class SimpleCategoryDAO implements CategoryDAO {
     public SimpleCategoryDAO() {
         // Initialize the categories list with some sample data
         categories = new ArrayList<>();
-        categories.add(new Category(1, "Food", "Various food items", null)); // Assuming description and picture are optional
+        categories.add(new Category(1, "Food", "Various food items", null));
         categories.add(new Category(2, "Clothing", "Apparel and garments", null));
     }
 

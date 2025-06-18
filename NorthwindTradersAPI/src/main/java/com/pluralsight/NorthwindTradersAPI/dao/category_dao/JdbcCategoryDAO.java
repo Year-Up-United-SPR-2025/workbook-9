@@ -50,7 +50,7 @@ public class JdbcCategoryDAO {
                 int categoryId = resultSet.getInt(1);
                 String categoryName = resultSet.getString(2);
                 String description = resultSet.getString(3);
-                byte[] picture = resultSet.getBytes(4); // Assuming Picture is stored as a byte array
+                byte[] picture = resultSet.getBytes(4);
                 Category category = new Category(categoryId, categoryName, description, picture);
                 categories.add(category);
             }
@@ -88,7 +88,7 @@ public class JdbcCategoryDAO {
                 if (resultSet.next()) {
                     String categoryName = resultSet.getString(2);
                     String description = resultSet.getString(3);
-                    byte[] picture = resultSet.getBytes(4); // Assuming Picture is stored as a byte array
+                    byte[] picture = resultSet.getBytes(4);
                     return new Category(categoryId, categoryName, description, picture);
                 }
             }
