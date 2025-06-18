@@ -1,13 +1,12 @@
 package com.pluralsight.NorthwindTradersAPI.dao.product_dao;
 
 import com.pluralsight.NorthwindTradersAPI.models.Product;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class SimpleProductDAO implements ProductDAO {
+
+public class SimpleProductDAO implements ProductDAO{
 
 
     @Override
