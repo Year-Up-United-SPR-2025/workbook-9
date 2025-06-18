@@ -4,6 +4,7 @@ import com.pluralsight.NorthwindTradersAPI.dao.product_dao.ProductDAO;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,18 +15,24 @@ public class ProductsController {
     private ProductDAO productDAO;
 
     @Autowired
-    public ProductsController(@Qualifier("simpleProductDAO") ProductDAO productDAO) {
+    public ProductsController(ProductDAO productDAO) {
         this.productDAO = productDAO;
     }
 
-    @RequestMapping(path = "/products", method = RequestMethod.GET)
-    public List<Product> getProducts() {
+    @RequestMapping(path="/products", method = RequestMethod.GET)
+    public List<Product> getProducts(){
         return productDAO.getAllProducts();
     }
 
-    @RequestMapping(path = "/products/{id}", method = RequestMethod.GET)
-    public Product getProduct(@PathVariable int id) {
+    @RequestMapping(path="/products/{id}", method = RequestMethod.GET)
+    public Product getProducts( @PathVariable int id){
         return productDAO.getProductById(id);
     }
+
+    @RequestMapping(path="/products", method=RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Product addProduct(@RequestBody Product product){
+        return productDAO.addProduct(product);
+    }
+
 }
-   

@@ -29,7 +29,8 @@ public class SimpleProductDAO implements ProductDAO {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         //do nothing so far.
+        return new Product();
     }
 }
