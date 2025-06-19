@@ -1,6 +1,6 @@
 package com.pluralsight.NorthwindTradersAPI.dao.product_dao;
 
-import com.pluralsight.NorthwindTradersAPI.dao.DatabaseConfig;
+import com.pluralsight.NorthwindTradersAPI.config.DatabaseConfig;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
